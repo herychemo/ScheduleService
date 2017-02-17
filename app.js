@@ -262,3 +262,5 @@ app.listen(http_port, interface, function(){
 
 console.log("done...");
 //End
+
+module.exports = app ;
