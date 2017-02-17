@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
+    "test": "IP=0.0.0.0 PORT=3030"
   },
   "repository": {
     "type": "git",
