@@ -17,7 +17,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
     mongoURLLabel = "";
 
-/*if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
+if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
   var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
       mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
       mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
@@ -34,7 +34,7 @@ var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
     mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
   }
-}*/
+}
 var db = null,
     dbDetails = new Object();
 var initDb = function(callback) {
@@ -59,6 +59,11 @@ var initDb = function(callback) {
 
 
 //mongoose.connect("mongodb://localhost/schedule_service");
+
+
+initDb(function(err){
+  console.log('Error connecting to Mongo. Message:\n'+err);
+});
 
 var User = require("./models/User").User,
 	Note =  require("./models/Note").Note;
@@ -253,10 +258,6 @@ app.get("/", function(req, res){
 
 app.use("/", log_middleware);
 app.use("/api", api_router);
-
-initDb(function(err){
-  console.log('Error connecting to Mongo. Message:\n'+err);
-});
 
 app.listen(http_port, interface, function(){
 	console.log("running...");
