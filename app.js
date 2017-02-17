@@ -10,6 +10,7 @@ var express = require("express"),
 //var service = require('./services');
 var ObjectId = require('mongoose').Types.ObjectId; 
 
+console.log("Cosas...")
 
 /*from Openshift*/
 var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
@@ -35,11 +36,9 @@ if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
     mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
   }
 }
-var db = null,
-    dbDetails = new Object();
 var initDb = function(callback) {
   if (mongoURL == null) return;
-  var mongodb = require('mongodb');
+  //var mongodb = require('mongodb');
   if (mongodb == null) return;
 
 	mongoose.connect( mongoURL );
