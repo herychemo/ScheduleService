@@ -258,8 +258,9 @@ app.get("/", function(req, res){
 app.use("/", log_middleware);
 app.use("/api", api_router);
 
-app.listen(http_port, interface, function(){
+app.listen(port, ip, function(){
 	console.log("running...");
+	console.log('Server running on http://%s:%s', ip, port);
 });
 
 console.log("done...");
