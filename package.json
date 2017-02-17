@@ -1,0 +1,24 @@
+{
+  "name": "schedule_service",
+  "version": "1.0.0",
+  "description": "Schedule Service API Deploy",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/herychemo/ScheduleService.git"
+  },
+  "author": "Heriberto Reyes Esparza",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/herychemo/ScheduleService/issues"
+  },
+  "homepage": "https://github.com/herychemo/ScheduleService#readme",
+  "dependencies": {
+    "body-parser": "^1.16.1",
+    "express": "^4.14.1",
+    "mongoose": "^4.8.3"
+  }
+}
