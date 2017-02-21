@@ -18,10 +18,10 @@ var User = require("./models/User").User,
 var app = express();
 
 //var secure_port = process.env.SECURE_PORT || 443;
-var http_port = process.env.NORMAL_PORT || 8080;
-var interface = process.env.SERVER_IFACE || null;
+//var http_port = process.env.NORMAL_PORT || 8080;
+//var interface = process.env.SERVER_IFACE || null;
 
-
+app.set('port', (process.env.PORT || 5000));
 /* SSL * /
 https.createServer({
 	key: fs.readFileSync('./SSL/key.key'),
@@ -225,9 +225,9 @@ app.get('/pagecount', function (req, res) {
 });
 
 
-app.listen(port, ip, function(){
+app.listen( app.get('port') , function(){
 	console.log("running...");
-	console.log('Server running on http://%s:%s', ip, port);
+	//console.log('Server running on http://%s:%s', ip, port);
 });
 
 console.log("done...");
