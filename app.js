@@ -10,61 +10,7 @@ var express = require("express"),
 //var service = require('./services');
 var ObjectId = require('mongoose').Types.ObjectId; 
 
-console.log("Cosas...")
-
-/*from Openshift*/
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-    ip   = process.env.IP   || process.env.OPENSHIFT_NODEJS_IP || '0.0.0.0',
-    mongoURL = process.env.OPENSHIFT_MONGODB_DB_URL || process.env.MONGO_URL,
-    mongoURLLabel = "";
-
-if (mongoURL == null && process.env.DATABASE_SERVICE_NAME) {
-  var mongoServiceName = process.env.DATABASE_SERVICE_NAME.toUpperCase(),
-      mongoHost = process.env[mongoServiceName + '_SERVICE_HOST'],
-      mongoPort = process.env[mongoServiceName + '_SERVICE_PORT'],
-      mongoDatabase = process.env[mongoServiceName + '_DATABASE'],
-      mongoPassword = process.env[mongoServiceName + '_PASSWORD']
-      mongoUser = process.env[mongoServiceName + '_USER'];
-
-  if (mongoHost && mongoPort && mongoDatabase) {
-    mongoURLLabel = mongoURL = 'mongodb://';
-    if (mongoUser && mongoPassword) {
-      mongoURL += mongoUser + ':' + mongoPassword + '@';
-    }
-    // Provide UI label that excludes user id and pw
-    mongoURLLabel += mongoHost + ':' + mongoPort + '/' + mongoDatabase;
-    mongoURL += mongoHost + ':' +  mongoPort + '/' + mongoDatabase;
-  }
-}
-db = false;
-var initDb = function(callback) {
-  if (mongoURL == null) return;
-  //var mongodb = require('mongodb');
-  //if (mongodb == null) return;
-
-	mongoose.connect( mongoURL );
-	db = true;
-  /*mongodb.connect(mongoURL, function(err, conn) {
-    if (err) {
-      callback(err);
-      return;
-    }
-    db = conn;
-    dbDetails.databaseName = db.databaseName;
-    dbDetails.url = mongoURLLabel;
-    dbDetails.type = 'MongoDB';
-    console.log('Connected to MongoDB at: %s', mongoURL);
-  });*/
-};
-/*from Openshift ends*/
-
-
-//mongoose.connect("mongodb://localhost/schedule_service");
-
-
-initDb(function(err){
-  console.log('Error connecting to Mongo. Message:\n'+err);
-});
+mongoose.connect("mongodb://localhost/schedule_service");
 
 var User = require("./models/User").User,
 	Note =  require("./models/Note").Note;
@@ -72,8 +18,8 @@ var User = require("./models/User").User,
 var app = express();
 
 //var secure_port = process.env.SECURE_PORT || 443;
-//var http_port = process.env.NORMAL_PORT || 8080;
-//var interface = process.env.SERVER_IFACE || null;
+var http_port = process.env.NORMAL_PORT || 8080;
+var interface = process.env.SERVER_IFACE || null;
 
 
 /* SSL * /
